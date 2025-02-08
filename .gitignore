@@ -6,6 +6,7 @@ files
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea/**/dbnavigator.xml
+echo ".idea/" >> .gitignore
 
 # Gradle
 .idea/**/gradle.xml

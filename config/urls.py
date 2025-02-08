@@ -22,5 +22,6 @@ urlpatterns = [
     path('books/', include('apps.books.urls')),
     path('notification/', include('apps.notifications.urls')),
     path('orders/', include('apps.orders.urls')),
+    path('api/', include('apps.api.urls')),
 ]
 
