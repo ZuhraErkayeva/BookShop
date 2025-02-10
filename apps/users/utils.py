@@ -1,27 +1,11 @@
-# from django.core.mail import send_mail
-# from django.contrib.auth.tokens import default_token_generator
-# from django.conf import settings
-#
-#
-# def send_email_verification(user):
-#     token = default_token_generator.make_token(user)
-#     uid = user.pk
-#     verification_link = f"http://localhost:8000/users/verify-email/{uid}/{token}/"
-#
-#     subject = "Emailingizni tasdiqlang"
-#     message = f"Salom {user.username}, emailingizni tasdiqlash uchun quyidagi linkni bosing: {verification_link}"
-#
-#     send_mail(
-#         subject,
-#         message,
-#         settings.DEFAULT_FROM_EMAIL,
-#         [user.email],
-#         fail_silently=False
-#     )
-#
-#
-#
-# def send_reset_email(email, reset_url):
-#     subject = "Parolni tiklash"
-#     message = f"Parolingizni tiklash uchun quyidagi havolani bosing:\n\n{reset_url}"
-#     send_mail(subject, message, "erkayevazuhra6@gmail.com", [email])
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+from apps.users.models import User
+
+user = User.objects.get(email="erkayevazuhra6@gmail.com")  # O'zingiz xohlagan userni tanlang
+uid = urlsafe_base64_encode(force_bytes(user.pk))
+token = default_token_generator.make_token(user)
+
+verification_link = f"http://127.0.0.1:8000/users/verify-email/?uid={uid}&token={token}"
+print("Tasdiqlash havolasi:", verification_link)
